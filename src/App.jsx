@@ -10,6 +10,13 @@ function App() {
     isPublished: false,
   });
 
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
 
   const sendPost = (event) => {
     event.preventDefault();
@@ -51,14 +58,14 @@ function App() {
               className="form-control"
               placeholder="Titolo"
               value={formData.title}
-              
+              onChange={handleInputChange}
             />
             <textarea
               name="content"
               className="form-control mt-3"
               placeholder="Contenuto"
               value={formData.content}
-             
+              onChange={handleInputChange}
             />
             <input
               type="text"
@@ -66,13 +73,13 @@ function App() {
               className="form-control mt-3"
               placeholder="URL immagine"
               value={formData.image}
-             
+              onChange={handleInputChange}
             />
             <select
               name="category"
               className="form-control mt-3"
               value={formData.category}
-              
+              onChange={handleInputChange}
             >
               <option value="">Seleziona categoria</option>
               <option value="Tech">Tech</option>
@@ -85,7 +92,7 @@ function App() {
                 name="isPublished"
                 className="form-check-input"
                 checked={formData.isPublished}
-                
+                onChange={handleInputChange}
               />
               <label className="form-check-label">Pubblica articolo</label>
             </div>
